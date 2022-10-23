@@ -47,7 +47,3 @@ class Konto:
         else:
             self._saldo = 0
 
-
-# konto = Konto("J", "M", "61000000000", "PROM_XYZ")
-# print(konto.saldo)
-print(is_promotion_code_correct("PROM_XYZ"))
