@@ -24,3 +24,13 @@ class TestCreateBankAccount(unittest.TestCase):
         konto_2 = Konto("Name", "Surname", "00000000000")
         self.assertEqual(len(konto_2.pesel), 11)
         self.assertEqual(konto_2.pesel, "00000000000")
+
+    def test_promotion_code(self): 
+        konto = Konto("Sb", "Sth", "00000000000")
+        self.assertEqual(konto.saldo, 0)
+
+        konto = Konto("Sb", "Sth","00000000000", "PROM_1.l")
+        self.assertEqual(konto.saldo, 50)
+
+        konto = Konto("Sb", "Sth", "00000000000", "PROM_1234")
+        self.assertEqual(konto.saldo, 0)
