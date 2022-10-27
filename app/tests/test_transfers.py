@@ -9,7 +9,7 @@ class TestTransfers(unittest.TestCase):
     mocked_saldo_enough = 1000
     mocked_pesel = "61200000000"
 
-    def test_recieve_transfer_correct(self):
+    def test_send_transfer_correct(self):
         konto = Konto(self.mocked_name, self.mocked_surname, self.mocked_pesel)
         konto._saldo = self.mocked_saldo_enough
         konto.send(self.mocked_amount)
