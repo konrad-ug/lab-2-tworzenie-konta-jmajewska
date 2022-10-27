@@ -27,3 +27,6 @@ class TestTransfers(unittest.TestCase):
         konto._saldo = self.mocked_saldo_enough
         konto.send(self.mocked_amount_edge)
         self.assertEqual(konto.saldo, self.mocked_saldo_enough - self.mocked_amount_edge)
+
+    def test_receive_transfer(self):
+        konto = Konto(self.mocked_name, self.mocked_surname, self.mocked_pesel)
