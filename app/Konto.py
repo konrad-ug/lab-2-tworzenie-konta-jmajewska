@@ -50,11 +50,8 @@ class Konto:
     def send(self,amount):
         saldo_after_transfer = self.saldo - amount
         if(saldo_after_transfer < 0):
-            raise Exception("Not enough money")
+            return False
         else:
-            self._saldo = saldo_after_transfer            
+            self._saldo = saldo_after_transfer     
+            return True       
 
-konto = Konto("a","b", "61200000000","PROM_XYZ")
-
-# konto.send(5)
-# print(konto.saldo)
