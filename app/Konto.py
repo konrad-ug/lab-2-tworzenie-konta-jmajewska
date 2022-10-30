@@ -55,3 +55,5 @@ class Konto:
             self._saldo = saldo_after_transfer     
             return True       
 
+    def recieve(self, amount):
+        self._saldo = self.saldo + amount
