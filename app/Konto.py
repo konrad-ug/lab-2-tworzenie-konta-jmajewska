@@ -18,15 +18,8 @@ def is_year_of_birdth_goof_for_promotion(pesel):
     return False
 
 
-class KontoBase:
-    def __init__(self):
-        pass
-    
-    isPrivate = False
-    isFirm = False
-
-
 class Konto:
+    charge = 1
     def __init__(self, imie, nazwisko, pesel, promotion_code=None):
         self.imie = imie
         self.nazwisko = nazwisko
@@ -66,22 +59,18 @@ class Konto:
 
     def recieve(self, amount):
         self._saldo = self.saldo + amount
-
+        
     def send_fast(self, amount):
-        if(isinstance(self, KontoFirmowe)):
-            charge = 5
-        else:
-            charge = 1
+        saldo_after_transfer = self.saldo - amount - self.charge
 
-        saldo_after_transfer = self.saldo - amount - charge
-
-        if(saldo_after_transfer < -charge):
+        if(saldo_after_transfer < -self.charge):
             return False
         else: 
             self._saldo = saldo_after_transfer
 
 
 class KontoFirmowe(Konto):
+    charge = 5
     def __init__(self,firm_name,nip,imie="",nazwisko="",pesel=""):
         super().__init__(self,imie,nazwisko,pesel)
         self.firm_name = firm_name
