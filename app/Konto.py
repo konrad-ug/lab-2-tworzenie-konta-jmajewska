@@ -25,6 +25,7 @@ class Konto:
         self.nazwisko = nazwisko
         self.saldo = (promotion_code, pesel)
         self.pesel = pesel
+        self.history = []
 
     @property
     def pesel(self):
@@ -55,10 +56,13 @@ class Konto:
             return False
         else:
             self._saldo = saldo_after_transfer
+            self._create_history(amount)
             return True
 
     def recieve(self, amount):
         self._saldo = self.saldo + amount
+        self._create_history(amount)
+
         
     def send_fast(self, amount):
         saldo_after_transfer = self.saldo - amount - self.charge
@@ -67,6 +71,10 @@ class Konto:
             return False
         else: 
             self._saldo = saldo_after_transfer
+            self._create_history(amount)
+
+    def _create_history(self,amount):
+         self.history.append(amount)
 
 
 class KontoFirmowe(Konto):
@@ -89,3 +97,6 @@ class KontoFirmowe(Konto):
     
 
 konto = KontoFirmowe("k","p")
+konto._saldo = 500
+konto.send(300)
+print(konto.history)
