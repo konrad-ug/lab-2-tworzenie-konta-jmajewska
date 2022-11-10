@@ -95,8 +95,3 @@ class KontoFirmowe(Konto):
         else: 
             self._nip = nip
     
-
-konto = KontoFirmowe("k","p")
-konto._saldo = 500
-konto.send(300)
-print(konto.history)
