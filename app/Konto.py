@@ -76,6 +76,26 @@ class Konto:
     def _create_history(self,amount):
          self.history.append(amount)
 
+    def get_credit(self,amount):
+        three_last_operations = self.history[-3:]
+        five_last_operations = self.history[-5:]
+        five_last_operations_sum = 0
+        three_last_operations_result = len(list(filter(lambda a : a < 0, three_last_operations))) > 0
+
+        for i in five_last_operations:
+            five_last_operations_sum += abs(int(i))
+        
+        five_last_operations_result = five_last_operations_sum > amount
+        print(five_last_operations_sum)
+
+        if  not three_last_operations_result or five_last_operations_result:
+            return False
+        else:
+            self._saldo += amount
+            return True
+        
+
+
 
 class KontoFirmowe(Konto):
     charge = 5
