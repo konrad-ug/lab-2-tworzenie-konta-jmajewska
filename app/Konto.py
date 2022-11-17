@@ -89,7 +89,6 @@ class Konto:
             five_last_operations_sum += abs(int(i))
         
         five_last_operations_result = five_last_operations_sum > amount
-        print(five_last_operations_sum > amount)
 
         if  three_last_operations_result or five_last_operations_result:
             self._saldo += amount
@@ -118,3 +117,10 @@ class KontoFirmowe(Konto):
         else: 
             self._nip = nip
     
+    def get_credit(self, amount):
+        zus_transfer = -1775
+        if(self.saldo >= 2*amount and (zus_transfer in self.history)):
+            self._saldo += amount
+            return True
+        else:
+            return False
