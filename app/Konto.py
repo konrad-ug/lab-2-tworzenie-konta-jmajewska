@@ -78,21 +78,24 @@ class Konto:
 
     def get_credit(self,amount):
         three_last_operations = self.history[-3:]
-        five_last_operations = self.history[-5:]
+        three_last_operations_result = len(list(filter(lambda a : a > 0, three_last_operations))) == 3
+        if(len(self.history) >= 5):
+            five_last_operations = self.history[-5:]
+        else:
+            five_last_operations = []
         five_last_operations_sum = 0
-        three_last_operations_result = len(list(filter(lambda a : a < 0, three_last_operations))) > 0
 
         for i in five_last_operations:
             five_last_operations_sum += abs(int(i))
         
         five_last_operations_result = five_last_operations_sum > amount
-        print(five_last_operations_sum)
+        print(five_last_operations_sum > amount)
 
-        if  not three_last_operations_result or five_last_operations_result:
-            return False
-        else:
+        if  three_last_operations_result or five_last_operations_result:
             self._saldo += amount
             return True
+        else:
+            return False
         
 
 
