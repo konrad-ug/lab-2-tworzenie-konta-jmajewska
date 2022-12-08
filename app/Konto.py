@@ -1,5 +1,5 @@
 import re
-
+import requests
 
 def is_promotion_code_correct(promotion_code):
     if (re.match(r"PROM_[^\s][^\s][^\s]$", promotion_code)):
@@ -26,6 +26,7 @@ class Konto:
         self.saldo = (promotion_code, pesel)
         self.pesel = pesel
         self.history = []
+
 
     @property
     def pesel(self):
@@ -104,7 +105,10 @@ class KontoFirmowe(Konto):
     def __init__(self,firm_name,nip,imie="",nazwisko="",pesel=""):
         super().__init__(self,imie,nazwisko,pesel)
         self.firm_name = firm_name
-        self.nip = (nip)
+        if(not self.check_if_NIP_is_valid(nip)):
+            self._nip = "Pranie"
+        else:
+            self.nip = (nip)
 
     @property
     def nip(self):
@@ -124,3 +128,20 @@ class KontoFirmowe(Konto):
             return True
         else:
             return False
+
+    @classmethod
+    def check_if_NIP_is_valid(cls,nip):
+        print("test")
+        BANK_APP_MF_URL = "https://wl-api.mf.gov.pl"
+        r = requests.get(f"{BANK_APP_MF_URL}//api/search/nip/{nip}?date=2022-12-08")
+        if(r.status_code == 200):
+            return True
+        else:
+            return False
+  
+KontoFirmowe.check_if_NIP_is_valid("7740001454")
+konto = KontoFirmowe("nazwa","7740001454")
+print(konto)
+konto1 = KontoFirmowe("nazwa","xxxxxxxxxx")
+print(konto1.nip)
+

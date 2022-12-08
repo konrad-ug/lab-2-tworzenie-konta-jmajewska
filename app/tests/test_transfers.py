@@ -10,7 +10,7 @@ class TestTransfers(unittest.TestCase):
     mocked_saldo_too_little = 100
     mocked_saldo_enough = 1000
     mocked_pesel = "61200000000"
-    mocked_nip = "0000000000"
+    mocked_nip = "7740001454"
     mocked_nip_wrong = "000"
 
     def test_send_transfer_correct(self):
@@ -41,11 +41,11 @@ class TestTransfers(unittest.TestCase):
 
     def test_firm_account_create_wrong_nip(self):
         konto_firmowe = KontoFirmowe(self.mocked_name,self.mocked_nip_wrong)
-        self.assertEqual(konto_firmowe.nip, "Niepoprawny nip")
+        self.assertEqual(konto_firmowe.nip, "Pranie")
     
     def test_firm_account_correct_nip(self):
-        konto_firmowe = KontoFirmowe(self.mocked_name,self.mocked_nip)
-        self.assertEqual(len(konto_firmowe.nip), 10)
+        konto_firmowe = KontoFirmowe(self.mocked_name,"7740001454")
+        self.assertEqual(konto_firmowe.nip, "7740001454")
 
     def test_fast_transfer_enough_money(self):
         konto = Konto(self.mocked_name, self.mocked_surname, self.mocked_pesel)
