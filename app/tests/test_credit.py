@@ -4,14 +4,6 @@ from parameterized import parameterized
 
 
 class TestCredit(unittest.TestCase):
-    # konto_fail._saldo = 1000
-    # konto_fail.history = [-100, 200, -200, 300, 100]
-    # credit_fail = 2000
-    # credit_success = 900
-    # konto_success._saldo = 1000
-    # konto_success.history = [-100, 200, -200, 300, 100]
-    # konto_fail_too_short._saldo = 1000
-    # konto_fail_too_short.history = [200, -200, 300, 100]
 
     def setUp(self):
         self.konto = Konto("imie", "nazwisko", "00000000000")
@@ -42,3 +34,30 @@ class TestCredit(unittest.TestCase):
         self.assertEqual(self.konto.saldo, 1000)
         self.assertEqual(czy_przyznany, given)
 
+class TestCompanyCredit(unittest.TestCase):
+
+    def setUp(self):
+        self.konto = KontoFirmowe('firma','1111111111')
+        self.konto._saldo = 2000
+
+    @parameterized.expand(
+        [
+            ([100,100,-200],1000 ,False),
+            ([100,-1775,200],3000,False)
+        ]
+    )
+    def test_company_history_fail(self,history,credit,given):
+        self.konto.history = history
+        is_given = self.konto.get_credit(credit)
+        self.assertEqual(is_given,given)
+
+    @parameterized.expand(
+        [
+            ([100,-1775],500,True),
+            ([100,1775,-1775],1000,True)
+        ]
+    )
+    def test_company_credit_succeed(self,history,credit,given):
+        self.konto.history = history
+        is_given = self.konto.get_credit(credit)
+        self.assertEqual(is_given,True)
