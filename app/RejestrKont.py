@@ -26,7 +26,7 @@ class RejestrKont:
             if(nazwisko):
                 konto.nazwisko = nazwisko
             if(saldo):
-                konto.saldo = saldo
+                konto._saldo = saldo
             return konto
         else:
             return None
@@ -42,6 +42,4 @@ class RejestrKont:
             for konto in cls.rejestr:
                 if(konto.pesel != pesel):
                     new_rejestr.append(konto)
-            print(new_rejestr)
             cls.rejestr = new_rejestr
-            return cls.rejestr
