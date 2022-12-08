@@ -23,8 +23,10 @@ class TestRejest(unittest.TestCase):
         self.assertEqual(konto_found,konto)
 
     def konto_find_not_existing_konto(self):
-        konto = Konto('i','n','0000000000x')
-        self.assertEqual(RejestrKont.findKonto(konto),"There is no such an account")
+        konto = Konto('i','n','00000000006')
+        result = RejestrKont.findKonto(konto)
+        proper_result="There is no such an account"
+        self.assertEqual(result,proper_result)
 
 
     def test_rejestr(self):
@@ -37,5 +39,4 @@ class TestRejest(unittest.TestCase):
         self.assertEqual(len(RejestrKont.rejestr), 5)
 
     def test_rejestr_count(self):
-        rejestr = RejestrKont()
-        self.assertEqual(rejestr.kontoCount(),5)
+        self.assertEqual(RejestrKont.kontoCount(),5)
