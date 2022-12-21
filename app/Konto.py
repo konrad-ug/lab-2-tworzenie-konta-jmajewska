@@ -116,9 +116,6 @@ class KontoFirmowe(Konto):
 
     @nip.setter
     def nip(self,nip):
-        if(len(nip) != 10):
-            self._nip = "Niepoprawny nip"
-        else: 
             self._nip = nip
     
     def get_credit(self, amount):
@@ -138,10 +135,3 @@ class KontoFirmowe(Konto):
             return True
         else:
             return False
-  
-KontoFirmowe.check_if_NIP_is_valid("7740001454")
-konto = KontoFirmowe("nazwa","7740001454")
-print(konto)
-konto1 = KontoFirmowe("nazwa","xxxxxxxxxx")
-print(konto1.nip)
-

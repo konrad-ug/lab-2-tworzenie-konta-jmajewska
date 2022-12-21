@@ -38,8 +38,8 @@ class RejestrKont:
             return None
         else: 
             new_rejestr = []
-            # filtered_rejestr = filter(lambda konto : konto.pesel == pesel, cls.rejestr)
             for konto in cls.rejestr:
                 if(konto.pesel != pesel):
                     new_rejestr.append(konto)
             cls.rejestr = new_rejestr
+            return True

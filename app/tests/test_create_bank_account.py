@@ -1,7 +1,7 @@
 from cmath import exp
 import unittest
 
-from ..Konto import Konto,KontoFirmowe, is_year_of_birdth_goof_for_promotion, is_promotion_code_correct
+from ..Konto import Konto, is_year_of_birdth_goof_for_promotion, is_promotion_code_correct
 
 
 class TestUtilFunctionsForCreatingBankAccount(unittest.TestCase):
@@ -95,7 +95,3 @@ class TestCreateBankAccount(unittest.TestCase):
 
         konto = Konto(self.mocked_name, self.mocked_surname, self.mocked_correct_pesel, self.mocked_promotion_code_wrong)
         self.assertEqual(konto.saldo, 0)
-
-    def test_create_konto_firmowe(self):
-        konto = KontoFirmowe("name", "xxxxxxxxxx")
-        self.assertEqual(konto.nip, "Pranie")

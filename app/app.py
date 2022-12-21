@@ -18,7 +18,7 @@ def stworz_konto():
 def ile_kont():
     print(f"Request o liczbe kont")
     count = RejestrKont.kontoCount()
-    return jsonify(accounts_count=count), 201
+    return jsonify(accounts_count=count), 200
 
 
 @app.route("/konta/konto/<pesel>", methods=['GET'])
@@ -27,18 +27,17 @@ def wyszukaj_konto_z_peselem(pesel):
     if(type(konto) != str):
         return jsonify(imie=konto.imie), 200
     else: 
-        return jsonify(error=konto), 401
+        return jsonify(error=konto), 404
 
 @app.route("/konta/usun_konto/<pesel>", methods=["DELETE"])
 def usun_konto(pesel):
-    print(pesel)
     result = RejestrKont.kontoDelete(pesel)
     if(result == None):
         return jsonify(error="There is no such account"), 404
     else: 
         return jsonify("Konto usunięte"), 204
 
-@app.route("/konta/konto/zmien_konto/<pesel>", methods=["POST"])
+@app.route("/konta/konto/zmien_konto/<pesel>", methods=["PUT"])
 def zmien_konto(pesel):
     dane = request.get_json()
     result = RejestrKont.kontoUpdate(pesel,dane["imie"],dane["nazwisko"])

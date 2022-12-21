@@ -1,5 +1,6 @@
 import unittest
 from ..Konto import Konto, KontoFirmowe
+from unittest.mock import patch
 
 
 class TestTransfers(unittest.TestCase):
