@@ -1,10 +1,15 @@
 from ..Konto import Konto, KontoFirmowe
 import unittest
+from unittest.mock import patch,Mock
 from parameterized import parameterized
 
 
 class TestCredit(unittest.TestCase):
 
+    
+    def _mock_response(self, status):
+        return Mock(status_code=status)
+    
     def setUp(self):
         self.konto = Konto("imie", "nazwisko", "00000000000")
         self.konto._saldo = 1000
@@ -36,7 +41,10 @@ class TestCredit(unittest.TestCase):
 
 class TestCompanyCredit(unittest.TestCase):
 
-    def setUp(self):
+    @patch('request.get')
+    def setUp(self,mock_get):
+        mock_response = self._mock_response(200)
+        mock_get.return_value = mock_response
         self.konto = KontoFirmowe('firma','1111111111')
         self.konto._saldo = 2000
 
